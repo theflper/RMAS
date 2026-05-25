@@ -1,3 +1,6 @@
 Dodato je to da se studentu prikazuje mogucnost da se dodaju ocene samo za ispit koji nije polozio
 Takodje dodat zadatak da se studentu doda polje (String) da odabere fakultet izmedju:
 "ELFAK NIS", "ETF BG" i "FTN NS"
+Dodata adresa studenta (kao data klasa) koj se pamti u klasi student
+Od podatak imamo: city,street i number
+Adresa se unosi na AddStudentScreen-u ali se pamti kao objekat klase Address

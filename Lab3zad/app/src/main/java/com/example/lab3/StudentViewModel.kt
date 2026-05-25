@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.lab3.data.Exam
 import com.example.lab3.data.PassedExam
 import com.example.lab3.data.Student
+import com.example.lab3.data.Address
 
 class StudentViewModel : ViewModel() {
 
@@ -26,7 +27,8 @@ class StudentViewModel : ViewModel() {
                         grade = 10
                     )
                 ),
-                faculty="ELFAK NIS"
+                faculty="ELFAK NIS",
+                address=Address("Nis",street="Bulevar Nemanjica","84/13")
             ),
             Student(
                 id = 2,
@@ -35,7 +37,8 @@ class StudentViewModel : ViewModel() {
                 lastName = "Jovanovic",
                 yearOfAdmission = 2023,
                 passedExams = emptyList(),
-                faculty="ETF BG"
+                faculty="ETF BG",
+                address=Address("Beograd",street="Dragice Pravice",number="bb")
             )
         )
     )
@@ -61,7 +64,10 @@ class StudentViewModel : ViewModel() {
         firstName: String,
         lastName: String,
         yearOfAdmission: Int,
-        faculty: String
+        faculty: String,
+        city: String,
+        street:String,
+        number:String
     ) {
         val newStudent = Student(
             id = nextStudentId,
@@ -69,7 +75,8 @@ class StudentViewModel : ViewModel() {
             firstName = firstName,
             lastName = lastName,
             yearOfAdmission = yearOfAdmission,
-            faculty=faculty
+            faculty=faculty,
+            address=Address(city,street,number)
         )
 
         nextStudentId++
@@ -80,7 +87,6 @@ class StudentViewModel : ViewModel() {
     fun selectStudent(student: Student) {
         selectedStudent.value = student
     }
-
     //TODO: Add AddExams function
     fun addExam(name: String) {
         val newExam = Exam(

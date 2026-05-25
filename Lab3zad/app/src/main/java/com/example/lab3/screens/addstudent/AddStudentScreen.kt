@@ -31,7 +31,10 @@ fun AddStudentScreen(
         firstName: String,
         lastName: String,
         yearOfAdmission: Int,
-        faculty: String
+        faculty: String,
+        city:String,
+        street:String,
+        number:String
     ) -> Unit,
     onBackClick: () -> Unit
 ) {
@@ -40,6 +43,9 @@ fun AddStudentScreen(
     var lastName by remember { mutableStateOf("") }
     var yearOfAdmission by remember { mutableStateOf("") }
     var faculty by remember { mutableStateOf("") }
+    var city by remember { mutableStateOf("") }
+    var street by remember { mutableStateOf("") }
+    var number by remember { mutableStateOf("") }
     var facultyList by remember {mutableStateOf(
         listOf(
             "ELFAK NIS",
@@ -98,6 +104,24 @@ fun AddStudentScreen(
             ),
             modifier = Modifier.fillMaxWidth()
         )
+        OutlinedTextField(
+            value = city,
+            onValueChange = { city = it },
+            label = { Text("City") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = street,
+            onValueChange = { street = it },
+            label = { Text("Street") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = number,
+            onValueChange = { number = it },
+            label = { Text("Number") },
+            modifier = Modifier.fillMaxWidth()
+        )
         Text(
             text = "Choose faculty",
             style = MaterialTheme.typography.titleMedium
@@ -140,7 +164,10 @@ fun AddStudentScreen(
                     firstName,
                     lastName,
                     yearOfAdmission.toInt(),
-                    faculty
+                    faculty,
+                    city,
+                    street,
+                    number
                 )
             },
             enabled = isFormValid,

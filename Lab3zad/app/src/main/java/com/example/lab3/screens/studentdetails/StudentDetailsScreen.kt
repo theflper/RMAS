@@ -53,6 +53,9 @@ fun StudentDetailsScreen(
         Text("Last name: ${student.lastName}")
         Text("Year of admission: ${student.yearOfAdmission}")
         Text("Faculty: ${student.faculty}")
+        Text("Personal address:")//dodato
+        Text("City: ${student.address?.city}")
+        Text("Street: ${student.address?.street}${student.address?.number}")
 
         if (student.averageGrade == 0.0) {
             Text("Average grade: No passed exams")

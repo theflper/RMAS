@@ -1,0 +1,3 @@
+Dodat je view model da se ne gube podatci pri rotiranju ekrana
+Dodat uslov da se student ne moze dodati ako mu je prosek <6 ili >10 i godina upisa >2000 i <2027
+

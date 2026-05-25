@@ -25,7 +25,8 @@ class StudentViewModel : ViewModel() {
                         exam = Exam(2, "Programiranje"),
                         grade = 10
                     )
-                )
+                ),
+                faculty="ELFAK NIS"
             ),
             Student(
                 id = 2,
@@ -33,7 +34,8 @@ class StudentViewModel : ViewModel() {
                 firstName = "Ana",
                 lastName = "Jovanovic",
                 yearOfAdmission = 2023,
-                passedExams = emptyList()
+                passedExams = emptyList(),
+                faculty="ETF BG"
             )
         )
     )
@@ -58,14 +60,16 @@ class StudentViewModel : ViewModel() {
         studentNumber: String,
         firstName: String,
         lastName: String,
-        yearOfAdmission: Int
+        yearOfAdmission: Int,
+        faculty: String
     ) {
         val newStudent = Student(
             id = nextStudentId,
             studentNumber = studentNumber,
             firstName = firstName,
             lastName = lastName,
-            yearOfAdmission = yearOfAdmission
+            yearOfAdmission = yearOfAdmission,
+            faculty=faculty
         )
 
         nextStudentId++

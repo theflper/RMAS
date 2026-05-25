@@ -1,12 +1,15 @@
 package com.example.lab3.screens.addstudent
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -27,7 +30,8 @@ fun AddStudentScreen(
         studentNumber: String,
         firstName: String,
         lastName: String,
-        yearOfAdmission: Int
+        yearOfAdmission: Int,
+        faculty: String
     ) -> Unit,
     onBackClick: () -> Unit
 ) {
@@ -35,12 +39,23 @@ fun AddStudentScreen(
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var yearOfAdmission by remember { mutableStateOf("") }
-
+    var faculty by remember { mutableStateOf("") }
+    var facultyList by remember {mutableStateOf(
+        listOf(
+            "ELFAK NIS",
+            "ETF BG",
+            "FTN NS"
+        )
+    )
+    }//lista fakulteta na koje mozemo da idemo
+    var expanded by remember { mutableStateOf(false) }
+    //da li je otvorena drop down lista
     val isFormValid =
         studentNumber.isNotBlank() &&
                 firstName.isNotBlank() &&
                 lastName.isNotBlank() &&
                 yearOfAdmission.toIntOrNull() != null
+
 
     Column(
         modifier = Modifier
@@ -83,14 +98,49 @@ fun AddStudentScreen(
             ),
             modifier = Modifier.fillMaxWidth()
         )
+        Text(
+            text = "Choose faculty",
+            style = MaterialTheme.typography.titleMedium
+        )
+        Box(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            OutlinedButton(
+                onClick = { expanded = true },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = if (faculty.isNotEmpty()) faculty else "Choose faculty")
+                //koristi dodelu kod if-a ovde ako faculty nije "" onda se
+                //dodeli faculcy ako ne onda ispise da treba da odabermo fakultet
+                //Text(text = faculty.ifEmpty { "Choose faculty" })
+                //ovo iznad je drugi nacin da zamenimo if
+            }
 
+            DropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                // Prolazimo kroz filtriranu listu dostupnih ispita
+                facultyList.forEach { selfaculty ->
+                    DropdownMenuItem(
+                        text = { Text(selfaculty) },
+                        onClick = {
+                            faculty = selfaculty
+                            expanded = false
+                        }
+                    )
+                }
+            }
+        }
         Button(
             onClick = {
                 onSaveStudent(
                     studentNumber,
                     firstName,
                     lastName,
-                    yearOfAdmission.toInt()
+                    yearOfAdmission.toInt(),
+                    faculty
                 )
             },
             enabled = isFormValid,

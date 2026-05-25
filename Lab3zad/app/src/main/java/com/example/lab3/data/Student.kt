@@ -7,7 +7,9 @@ data class Student(
     val firstName: String,
     val lastName: String,
     val yearOfAdmission: Int,
-    val passedExams: List<PassedExam> = emptyList()
+    val passedExams: List<PassedExam> = emptyList(),
+    val faculty:String=""//dodamo fakultet
+    //dodata default vrednost da ne bi menjao parametre u konstruktoru u svim fajlovima
 ){
     val averageGrade: Double
         get() = if (passedExams.isEmpty()) {

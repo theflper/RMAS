@@ -52,6 +52,7 @@ fun StudentDetailsScreen(
         Text("First name: ${student.firstName}")
         Text("Last name: ${student.lastName}")
         Text("Year of admission: ${student.yearOfAdmission}")
+        Text("Faculty: ${student.faculty}")
 
         if (student.averageGrade == 0.0) {
             Text("Average grade: No passed exams")

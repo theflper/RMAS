@@ -1,0 +1,3 @@
+Dodato je to da se studentu prikazuje mogucnost da se dodaju ocene samo za ispit koji nije polozio
+Takodje dodat zadatak da se studentu doda polje (String) da odabere fakultet izmedju:
+"ELFAK NIS", "ETF BG" i "FTN NS"

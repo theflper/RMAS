@@ -40,12 +40,13 @@ fun StudentNavHost(
 
         composable(Routes.ADD_STUDENT) {
             AddStudentScreen(
-                onSaveStudent = { studentNumber, firstName, lastName, yearOfAdmission ->
+                onSaveStudent = { studentNumber, firstName, lastName, yearOfAdmission,faculty ->
                     studentViewModel.addStudent(
                         studentNumber = studentNumber,
                         firstName = firstName,
                         lastName = lastName,
-                        yearOfAdmission = yearOfAdmission
+                        yearOfAdmission = yearOfAdmission,
+                        faculty=faculty
                     )
                     navController.popBackStack()
                 },

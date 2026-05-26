@@ -52,7 +52,27 @@ class StudentViewModel : ViewModel() {
         )
     )
         private set
-
+    var hobys = mutableStateOf(
+        value= listOf(
+            "Kafa",
+            "Zurke",
+            "Teretana"
+        )
+    )
+    fun setHoby(hoby:String)
+    {
+        //kad menjamo nesto pravimo kopiju sa izmenjenim parametrima
+        //jedino tako mozemo da menjamo dataclass
+        val trenutniStudent = selectedStudent.value
+        if (trenutniStudent != null) {
+            // .copy kreira novog studenta gde su svi podaci isti, osim hobija
+            selectedStudent.value = trenutniStudent.copy(hoby = hoby)
+        }
+    }
+    fun addHoby(hoby:String)
+    {
+        hobys.value=hobys.value+hoby//dodavanje u listu
+    }
     var selectedStudent = mutableStateOf<Student?>(null)
         private set
 
@@ -96,6 +116,7 @@ class StudentViewModel : ViewModel() {
         nextExamId++
         exams.value = exams.value + newExam
     }
+    //ovo je jako bitno!!!
     fun addPassedExamToSelectedStudent(
         exam: Exam,
         grade: Int

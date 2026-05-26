@@ -10,6 +10,9 @@ import com.example.lab3.screens.addstudentpassedexam.AddStudentPassedExamScreen
 import com.example.lab3.screens.studentdetails.StudentDetailsScreen
 import com.example.lab3.screens.studentlist.StudentListScreen
 import com.example.lab3.StudentViewModel
+import com.example.lab3.screens.addhoby.AddHobyScreen
+import com.example.lab3.screens.selecthoby.SelectHobyScreen
+import com.example.lab3.screens.splitscreen.SplitScreen
 
 @Composable
 fun StudentNavHost(
@@ -29,7 +32,7 @@ fun StudentNavHost(
                 },
                 // Izmenjen Toast u pravu navigaciju ka ekranu za dodavanje ispita
                 onAddExamClick = {
-                    navController.navigate(Routes.ADD_EXAM)
+                    navController.navigate(Routes.SPLIT_SCREEN)
                 },
                 onStudentNameClick = { student ->
                     studentViewModel.selectStudent(student)
@@ -71,6 +74,9 @@ fun StudentNavHost(
                         inclusive = false//ako je ovo true unistava se i taj ekran
                         //ako je false kao ovde tad se zapravo vracamo na taj ekran
                     )
+                },
+                onHoby = {
+                    navController.navigate(Routes.SELECT_HOBY)
                 }
             )
         }
@@ -112,6 +118,59 @@ fun StudentNavHost(
                 },
                 onBackClick = {
                     navController.popBackStack()
+                },
+                onMainScreen = {
+                    navController.popBackStack(
+                        route=Routes.STUDENT_LIST,
+                        inclusive = false)
+                }
+            )
+        }
+        composable(Routes.ADD_HOBY) {
+            AddHobyScreen(
+                hobyes=studentViewModel.hobys.value,
+                onSaveHoby = {hoby -> studentViewModel.addHoby(hoby)},
+                onBackClick = {
+                    navController.popBackStack(
+                        route=Routes.SPLIT_SCREEN,
+                        inclusive = false)
+                },
+                onMainScreen = {
+                    navController.popBackStack(
+                        route=Routes.STUDENT_LIST,
+                        inclusive = false)
+                }
+            )
+        }
+        composable(Routes.SELECT_HOBY)
+        {
+            SelectHobyScreen(
+                hobys=studentViewModel.hobys.value,
+                onHobyClick = {
+                    //nauci se da pises prvo sta je input pa u sta se slika
+                    hoby->studentViewModel.setHoby(hoby)
+                    navController.popBackStack(
+                        route=Routes.STUDENT_DETAILS,
+                        inclusive = false
+                    )
+                }
+            )
+        }
+        composable(Routes.SPLIT_SCREEN)
+        {
+            SplitScreen(
+                goBack = {
+                    //ovako je bolje da uvek pises povratak
+                    navController.popBackStack(
+                        route=Routes.STUDENT_LIST,
+                        inclusive = false
+                    )
+                },
+                gotoExam = {
+                    navController.navigate(Routes.ADD_EXAM)
+                },
+                gotoHoby = {
+                    navController.navigate(Routes.ADD_HOBY)
                 }
             )
         }

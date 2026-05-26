@@ -66,7 +66,7 @@ fun StudentListScreen(
                 onClick = onAddExamClick,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Add exam")
+                Text("Add things")
             }
         }
     }

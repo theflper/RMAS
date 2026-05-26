@@ -10,7 +10,8 @@ data class Student(
     val passedExams: List<PassedExam> = emptyList(),
     val faculty:String="",//dodamo fakultet
     //dodata default vrednost da ne bi menjao parametre u konstruktoru u svim fajlovima
-    val address: Address?=Address()
+    val address: Address?=Address(),
+    val hoby: String = "no hoby"
 ){
     val averageGrade: Double
         get() = if (passedExams.isEmpty()) {
@@ -18,4 +19,5 @@ data class Student(
         } else {
             passedExams.map { it.grade }.average()
         }
+
 }

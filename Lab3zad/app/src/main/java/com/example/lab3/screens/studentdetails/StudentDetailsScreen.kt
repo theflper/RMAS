@@ -22,7 +22,8 @@ import com.example.lab3.data.Student
 fun StudentDetailsScreen(
     student: Student?,
     onAddPassedExamClick: () -> Unit,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onHoby: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -49,14 +50,14 @@ fun StudentDetailsScreen(
         }
 
         Text("Student number: ${student.studentNumber}")
-        Text("First name: ${student.firstName}")
-        Text("Last name: ${student.lastName}")
+        Text("Full name: ${student.firstName} ${student.lastName}")
         Text("Year of admission: ${student.yearOfAdmission}")
         Text("Faculty: ${student.faculty}")
-        Text("Personal address:")//dodato
+        //Text("Personal address:")
+        //dodato
         Text("City: ${student.address?.city}")
-        Text("Street: ${student.address?.street}${student.address?.number}")
-
+        Text("Street: ${student.address?.street} ${student.address?.number}")
+        Text("Hoby: ${student.hoby}")
         if (student.averageGrade == 0.0) {
             Text("Average grade: No passed exams")
         } else {
@@ -82,7 +83,12 @@ fun StudentDetailsScreen(
                 }
             }
         }
-
+        Button(
+            onClick = onHoby,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Add hoby")
+        }
         Button(
             onClick = onAddPassedExamClick,
             modifier = Modifier.fillMaxWidth()

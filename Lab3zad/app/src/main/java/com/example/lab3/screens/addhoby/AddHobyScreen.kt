@@ -1,4 +1,4 @@
-package com.example.lab3.screens.addexam
+package com.example.lab3.screens.addhoby
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,17 +21,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.lab3.data.Exam
-import com.example.lab3.screens.addexam.ExamRow
 
 @Composable
-fun AddExamScreen(
-    exams: List<Exam>,
-    onSaveExam: (String) -> Unit,
+fun AddHobyScreen(
+    hobyes: List<String>,
+    onSaveHoby: (String) -> Unit,
     onBackClick: () -> Unit,
-    onMainScreen: ()-> Unit
+    onMainScreen: ()->Unit
 ) {
-    var examName by remember { mutableStateOf("") }
+    var hobyName by remember { mutableStateOf("") }
     var isError by remember { mutableStateOf(false) }
 
     Column(
@@ -47,9 +45,9 @@ fun AddExamScreen(
 
         // Polje za unos naziva ispita
         OutlinedTextField(
-            value = examName,
+            value = hobyName,
             onValueChange = {
-                examName = it
+                hobyName = it
                 if (it.isNotBlank()) isError = false
             },
             label = { Text("Exam Name") },
@@ -65,39 +63,36 @@ fun AddExamScreen(
         // Dugme za čuvanje koje poziva funkciju prosleđenu iz NavHost-a
         Button(
             onClick = {
-                if (examName.isNotBlank()) {
-                    onSaveExam(examName.trim())
-                    examName = "" // Resetujemo polje nakon uspešnog unosa
+                if (hobyName.isNotBlank()) {
+                    onSaveHoby(hobyName.trim())
+                    hobyName = "" // Resetujemo polje nakon uspešnog unosa
                 } else {
                     isError = true
                 }
             },
             modifier = Modifier.fillMaxWidth(),
-            enabled=examName.isNotEmpty()
+            enabled=hobyName.isNotBlank()
         ) {
-            Text("Save Exam")
+            Text("Save Hoby")
         }
-
         Spacer(modifier = Modifier.height(8.dp))
-
         Text(
-            text = "Added exams",
+            text = "Added hobys",
             style = MaterialTheme.typography.titleMedium
         )
 
-        if (exams.isEmpty()) {
+        if (hobyes.isEmpty()) {
             Text("No exams added.")
         } else {
             LazyColumn(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(exams) { exam ->
-                    ExamRow(exam = exam)
+                items(hobyes) { hoby ->
+                    Text(text=hoby)
                 }
             }
         }
-
         OutlinedButton(
             onClick = onBackClick,
             modifier = Modifier.fillMaxWidth()

@@ -66,7 +66,11 @@ fun StudentNavHost(
                     navController.navigate(Routes.ADD_STUDENT_PASSED_EXAM)
                 },
                 onBackClick = {
-                    navController.popBackStack()
+                    navController.popBackStack(
+                        route = Routes.STUDENT_LIST,//gde se vracamo
+                        inclusive = false//ako je ovo true unistava se i taj ekran
+                        //ako je false kao ovde tad se zapravo vracamo na taj ekran
+                    )
                 }
             )
         }

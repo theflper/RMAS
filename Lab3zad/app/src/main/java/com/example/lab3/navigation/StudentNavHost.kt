@@ -84,7 +84,6 @@ fun StudentNavHost(
         composable(Routes.ADD_STUDENT_PASSED_EXAM) {
             // 1. Uzimamo selektovanog studenta iz ViewModel-a
             val currentStudent = studentViewModel.selectedStudent.value
-
             // 2. Iz liste položenih ispita izvlačimo samo 'exam' objekte.
             // Ako je student null, prosleđujemo praznu listu.
             val alreadyPassed = currentStudent?.passedExams?.map { it.exam } ?: emptyList()
@@ -117,7 +116,8 @@ fun StudentNavHost(
                     // ostane na ekranu i vidi kako se ispit dodao u "Added exams" listu ispod!
                 },
                 onBackClick = {
-                    navController.popBackStack()
+                    navController.popBackStack(route=Routes.SPLIT_SCREEN,
+                        inclusive=false)
                 },
                 onMainScreen = {
                     navController.popBackStack(

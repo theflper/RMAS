@@ -20,7 +20,7 @@ fun SelectHobyScreen(
     ){
         items(hobys)
         {
-            hoby->HobyClickable(hoby=hoby,onHobyClick=onHobyClick)
+            hoby->HobyClickable(hoby=hoby,onHobyClick=onHobyClick)//u šta se slika svaki item iz hobys liste
         }
     }
 }

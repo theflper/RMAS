@@ -16,6 +16,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -41,7 +42,7 @@ fun AddStudentScreen(
     var studentNumber by remember { mutableStateOf("") }
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
-    var yearOfAdmission by remember { mutableStateOf("") }
+    var yearOfAdmission by remember { mutableIntStateOf(2000) }
     var faculty by remember { mutableStateOf("") }
     var city by remember { mutableStateOf("") }
     var street by remember { mutableStateOf("") }
@@ -59,10 +60,7 @@ fun AddStudentScreen(
     val isFormValid =
         studentNumber.isNotBlank() &&
                 firstName.isNotBlank() &&
-                lastName.isNotBlank() &&
-                yearOfAdmission.toIntOrNull() != null
-
-
+                lastName.isNotBlank()
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -96,8 +94,8 @@ fun AddStudentScreen(
         )
 
         OutlinedTextField(
-            value = yearOfAdmission,
-            onValueChange = { yearOfAdmission = it },
+            value = yearOfAdmission.toString(),
+            onValueChange = { yearOfAdmission = it.toInt() },
             label = { Text("Year of admission") },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number
@@ -163,7 +161,7 @@ fun AddStudentScreen(
                     studentNumber,
                     firstName,
                     lastName,
-                    yearOfAdmission.toInt(),
+                    yearOfAdmission,
                     faculty,
                     city,
                     street,

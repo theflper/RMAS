@@ -61,13 +61,7 @@ class StudentViewModel : ViewModel() {
     )
     fun setHoby(hoby:String)
     {
-        //kad menjamo nesto pravimo kopiju sa izmenjenim parametrima
-        //jedino tako mozemo da menjamo dataclass
-        val trenutniStudent = selectedStudent.value
-        if (trenutniStudent != null) {
-            // .copy kreira novog studenta gde su svi podaci isti, osim hobija
-            selectedStudent.value = trenutniStudent.copy(hoby = hoby)
-        }
+        selectedStudent.value?.hoby=hoby;
     }
     fun addHoby(hoby:String)
     {
